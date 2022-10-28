@@ -3,12 +3,32 @@
  */
 package bitmap.transformer;
 
+import java.io.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) throws IOException {
+        var bf = new BufferedReader(new FileReader("app/src/main/resources/baldy-8bit.bmp"));
+        var bw = new BufferedWriter(new FileWriter("app/src/main/resources/baldy-2.png"));
+        byte[] arr = bf.readLine().getBytes();
+        System.out.println(arr.length);
+        ImageIO.write(createBitMap(arr), "bmp", new File("app/src/main/resources/test.bmp"));
+        bf.close();
+        bw.close();
+    }
+    public static BufferedImage createBitMap(byte[] bs) {
+        BufferedImage bf = new BufferedImage(110, 125, BufferedImage.TYPE_INT_ARGB);
+        for (int i = 0; i < 110; i++) {
+            for (int j = 0; j < 125; j++) {
+                bf.setRGB(i, j, ~bs[i] & 0xff);
+            }
+        }
+        return bf;
     }
 }
+//
