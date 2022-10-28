@@ -13,15 +13,6 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        var bf = new BufferedReader(new FileReader("app/src/main/resources/baldy-8bit.bmp"));
-        BufferedImage in = ImageIO.read(new File("app/src/main/resources/baldy-8bit.bmp"));
-        for (int i = 0; i < in.getWidth(); i++) {
-            for (int j = 0; j < in.getHeight(); j++) {
-                int rgb = in.getRGB(i, j);
-                in.setRGB(i, j, ~rgb & 0xff);
-            }
-        }
-        ImageIO.write(in, "bmp", new File("app/src/main/resources/test.bmp"));
-        bf.close();
+        Bitmap bm = new Bitmap(args[0], args[1], args[2]);
     }
 }
