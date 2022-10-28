@@ -25,7 +25,7 @@ public class Bitmap {
     private int transform(String transform, int i) {
         return switch (transform) {
             case "invert" -> ~i & 0xff;
-            case "grayscale" -> ;
+            case "grayscale" -> 1;
             default -> 0;
         };
     }
