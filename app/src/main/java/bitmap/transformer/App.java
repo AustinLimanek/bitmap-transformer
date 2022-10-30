@@ -13,6 +13,9 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        Bitmap bm = new Bitmap(args[0], args[1], args[2]);
+        String in = "/Users/austinlimanek/projects/courses/code-401/bitmap-transformer/bitmap-transformer/app/src/main/resources/baldy-8bit.bmp";
+        String out = "/Users/austinlimanek/projects/courses/code-401/bitmap-transformer/bitmap-transformer/app/src/main/resources/test3.bmp";
+
+        Bitmap bm = new Bitmap(in, out, "invert");
     }
 }
