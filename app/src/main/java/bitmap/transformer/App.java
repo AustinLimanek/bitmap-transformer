@@ -8,17 +8,12 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) throws IOException {
         //int num = (int) (10000*Math.random());
-        //String in = "/Users/austinlimanek/projects/courses/code-401/bitmap-transformer/bitmap-transformer/app/src/main/resources/baldy-8bit.bmp";
-        //String out = "/Users/austinlimanek/projects/courses/code-401/bitmap-transformer/bitmap-transformer/app/src/main/resources/test" + num +".bmp";
         int alpha = 0xff & -131076 >>> 24;
         alpha = alpha << 24;
         System.out.println(alpha);
-        Bitmap bm = new Bitmap(args[0], args[1], args[2] );
+        Bitmap bm = new Bitmap(args[0], args[1]);
     }
 }

@@ -7,8 +7,20 @@ import java.io.File;
 import java.io.IOException;
 
 public class Bitmap {
-    public Bitmap(String inFile, String outFile, String transform) throws IOException {
-        BufferedImage in = ImageIO.read(new File(inFile));
+
+    public static String getFilePath(){
+        String userPath = System.getProperty("user.dir");
+        if(userPath.endsWith("app")){
+            return userPath + "/src/main/resources/";
+        }
+        else{
+            return userPath + "/app/src/main/resources/";
+        }
+    }
+
+    public Bitmap(String outFile, String transform) throws IOException {
+        String path = getFilePath();
+        BufferedImage in = ImageIO.read(new File(path + "baldy-8bit.bmp"));
         for (int i = 0; i < in.getWidth(); i++) {
             for (int j = 0; j < in.getHeight(); j++) {
                 int rgb = in.getRGB(i, j);
@@ -19,7 +31,7 @@ public class Bitmap {
                 in.setRGB(i, j, transform(transform, rgb, colors, i));
             }
         }
-        ImageIO.write(in, "bmp", new File(outFile));
+        ImageIO.write(in, "bmp", new File(path + outFile));
     }
 
     private int transform(String transform, int i, int[] colors, int a) {
@@ -47,8 +59,7 @@ public class Bitmap {
             System.out.println(sum);
         }
         int ans = sum / colors.length;
-        System.out.println(ans);
-        return ans;
+        return 65536*ans + 256*ans + ans;
     }
 
     private int random(int i) {
