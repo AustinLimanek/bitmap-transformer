@@ -1,6 +1,8 @@
 package bitmap.transformer;
 
 import org.junit.jupiter.api.Test;
+
+import static bitmap.transformer.Bitmap.getFilePath;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.IOException;
@@ -9,24 +11,24 @@ import java.nio.file.Path;
 public class BitmapTest {
     @Test
     void outputFileInvertExists() {
+            String out = "invert.bmp";
+            String in = "baldy-8bit.bmp";
         try {
-            Path in = Path.of("src", "main", "resources", "baldy-8bit.bmp");
-            Path out = Path.of("src", "main", "resources", "invert.bmp");
-            new Bitmap(in.toString(), out.toString(), "invert");
+            new Bitmap(in, out, "invert", "none");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertTrue(new File("C:/Users/bhlie/Desktop/code401/bitmap-transformer/app/src/main/resources/invert.bmp").exists());
+        assertTrue(new File(getFilePath() + out).exists());
     }
     @Test
     void outputFileGrayScaleExists() {
+        String out = "grayscale.bmp";
+        String in = "baldy-8bit.bmp";
         try {
-            Path in = Path.of("src", "main", "resources", "baldy-8bit.bmp");
-            Path out = Path.of("src", "main", "resources", "grayscale.bmp");
-            new Bitmap(in.toString(), out.toString(), "grayscale");
+            new Bitmap(in, out, "grayscale", "none");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertTrue(new File("C:/Users/bhlie/Desktop/code401/bitmap-transformer/app/src/main/resources/grayscale.bmp").exists());
+        assertTrue(new File(getFilePath() + out).exists());
     }
 }
