@@ -1,6 +1,6 @@
 # Bitmap Transformer
 
-A Java application that transforms a provided bitmap image, `name.bmp`, into several variants. It can be run from the command line by providing the name of to be transformed (which must be located in the `resources` folder), the name of new bitmap file (name.bmp), plus two additional arguments depending on the transform. There are four available `transform` variants: `grayscale`, `invert`, `random`, and `flip`. The `flip` variant has two `types`: `horizontal` and `vertical`. The type for the other three variants is `none`.
+A Java application that transforms a provided bitmap image, `name.bmp`, into several variants. It can be run from the command line by providing the name of the file to be transformed (which must be located in the `resources` folder), the name of new bitmap file (name.bmp), plus two additional arguments depending on the transform. There are four available `transform` variants: `grayscale`, `invert`, `random`, and `flip`. The `flip` variant has two `types`: `horizontal` and `vertical`. The type for the other three variants is `none`.
 
 To run the application, clone the repo and (with Gradle) run `./gradlew run --args "<inputname>.bmp <outputname>.bmp <variant> <type>"`. The `Bitmap Transformer` comes preloaded with `baldy-8bit.bmp` and several examples of already completed transforms.
 
