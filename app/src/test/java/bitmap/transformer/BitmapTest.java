@@ -12,8 +12,9 @@ public class BitmapTest {
     @Test
     void outputFileInvertExists() {
             String out = "invert.bmp";
+            String in = "baldy-8bit.bmp";
         try {
-            new Bitmap(out, "invert");
+            new Bitmap(in, out, "invert", "none");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,8 +23,9 @@ public class BitmapTest {
     @Test
     void outputFileGrayScaleExists() {
         String out = "grayscale.bmp";
+        String in = "baldy-8bit.bmp";
         try {
-            new Bitmap(out, "grayscale");
+            new Bitmap(in, out, "grayscale", "none");
         } catch (IOException e) {
             e.printStackTrace();
         }

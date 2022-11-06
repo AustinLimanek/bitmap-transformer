@@ -18,20 +18,21 @@ public class Bitmap {
         }
     }
 
-    public Bitmap(String outFile, String transform) throws IOException {
-        String path = getFilePath();
-        BufferedImage in = ImageIO.read(new File(path + "baldy-8bit.bmp"));
-        for (int i = 0; i < in.getWidth(); i++) {
-            for (int j = 0; j < in.getHeight(); j++) {
-                int rgb = in.getRGB(i, j);
-                Color current = new Color(rgb);
-                //System.out.println(current);
-                //System.out.println(rgb);
-                int[] colors = {current.getRed(), current.getGreen(), current.getBlue()};
-                in.setRGB(i, j, transform(transform, rgb, colors, i));
+    public Bitmap(String inFile, String outFile, String transform, String type) throws IOException {
+        if (transform.equals("flip")) flip(inFile, outFile, type);
+        else {
+            String path = getFilePath();
+            BufferedImage in = ImageIO.read(new File(path + inFile));
+            for (int i = 0; i < in.getWidth(); i++) {
+                for (int j = 0; j < in.getHeight(); j++) {
+                    int rgb = in.getRGB(i, j);
+                    Color current = new Color(rgb);
+                    int[] colors = {current.getRed(), current.getGreen(), current.getBlue()};
+                    in.setRGB(i, j, transform(transform, rgb, colors, i));
+                }
             }
+            ImageIO.write(in, "bmp", new File(path + outFile));
         }
-        ImageIO.write(in, "bmp", new File(path + outFile));
     }
 
     private int transform(String transform, int i, int[] colors, int a) {
@@ -39,14 +40,12 @@ public class Bitmap {
             case "invert" -> invert(i);
             case "grayscale" -> grayscale(colors);
             case "random" -> random(i);
-            case "red" -> red(colors, a);
             default -> 0;
         };
     }
 
     private int invert(int i) {
         int r = ~i & 0xff;
-        System.out.println(r);
         return r;
     }
 
@@ -54,31 +53,36 @@ public class Bitmap {
         int sum = 0;
         for (int i : colors) {
             sum += i;
-            Color current = new Color(i);
-            System.out.println(current);
-            System.out.println(sum);
         }
         int ans = sum / colors.length;
         return 65536*ans + 256*ans + ans;
     }
 
     private int random(int i) {
-        System.out.println(i);
         if (i == -131076){
-            return (int) (255*Math.random());
+            int red = (int) (255*Math.random());
+            int green = (int) (255*Math.random());
+            int blue = (int) (255*Math.random());
+            return 65536*red + 256*green + blue;
         }
         return i;
     }
 
-    //rgb = 65536 * r + 256 * g + b;
-    private int red(int[] colors, int a){
-        int red = colors[0];//(int) (127.5*Math.sin(2*Math.PI*a/110)+127.5);
-        int green = colors[1];//colors[1];
-        int blue = colors[2]; //colors[2];
-        int ans = 65536*red + 256*green + blue;
-        //System.out.println(ans);
-        return 65536*red + 256*green + blue;
-
+    public void flip(String inFile, String outFile, String type) throws IOException {
+        if (!type.equals("horizontal") && !type.equals("vertical")) throw new IllegalArgumentException("Please input either horizontal or vertical for flip transform.");
+        String path = getFilePath();
+        BufferedImage read = ImageIO.read(new File(path + inFile));
+        BufferedImage newImage = ImageIO.read(new File(path + inFile));
+        int width = read.getWidth();
+        int height = read.getHeight();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int rgb = read.getRGB(i, j);
+                if(type.equals("horizontal")) newImage.setRGB(width - i - 1, j, rgb);
+                else{newImage.setRGB(i, height - j - 1, rgb);}
+            }
+        }
+        ImageIO.write(newImage, "bmp", new File(path + outFile));
     }
 
 }
