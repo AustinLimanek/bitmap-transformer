@@ -12,11 +12,11 @@ Using `./gradlew run --args "baldy-8bit.bmp invert.bmp invert none"`
 
 <img src="./app/src/main/resources/images/invert.png" alt="baldy photo" width="200"/>
 
-Using `./gradlew run --args "baldy-8bit.bmp grayscale.bmp invert none"`
+Using `./gradlew run --args "baldy-8bit.bmp grayscale.bmp grayscale none"`
 
 <img src="./app/src/main/resources/images/grayscale.png" alt="baldy photo" width="200"/>
 
-Using `./gradlew run --args "baldy-8bit.bmp random.bmp invert none"`
+Using `./gradlew run --args "baldy-8bit.bmp random.bmp random none"`
 
 <img src="./app/src/main/resources/images/random.png" alt="baldy photo" width="200"/>
 
@@ -32,6 +32,6 @@ Using `./gradlew run --args "baldy-8bit.bmp fliphorizontal.bmp flip horizontal"`
 
 <img src="./app/src/main/resources/images/fliphandv.png" alt="baldy photo" width="200"/>
 
-You can continue to stack transforms. Try to guess what transforms were required to create this output:
+You can continue to stack transforms. Try to guess what transforms were required to create these outputs:
 
-<img src="./app/src/main/resources/images/fliphvinvertrandom.png" alt="baldy photo" width="200"/>
+<img src="./app/src/main/resources/images/fliphvinvertrandom.png" alt="baldy photo" width="200"/><img src="./app/src/main/resources/images/fliphvandrandom.png" alt="baldy photo" width="200"/>
